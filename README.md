@@ -67,4 +67,12 @@ See [`KNOWLEDGE_TRANSFER.md`](./KNOWLEDGE_TRANSFER.md) for detailed documentatio
 
 ---
 
+## Connect with me
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ajayprakash-r)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ajprakash97)
+[![Portfolio](https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=todoist&logoColor=white)](https://ajprakash.com)
+
+---
+
 **Built with React + Vite + TailwindCSS**

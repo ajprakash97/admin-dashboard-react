@@ -67,6 +67,14 @@ See [`KNOWLEDGE_TRANSFER.md`](./KNOWLEDGE_TRANSFER.md) for detailed documentatio
 
 ---
 
+## 👨‍💻 Author
+
+**Ajayprakash R**
+
+A passionate Full Stack Developer from Chennai, India with a love for building modern, responsive, and user-friendly web applications. I enjoy exploring new technologies to create efficient and scalable solutions.
+
+---
+
 ## Connect with me
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ajayprakash-r)

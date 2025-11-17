@@ -105,7 +105,6 @@ export const FilesPage = () => {
     },
   ])
 
-  // Store actual File objects for uploaded files
   const [fileObjects, setFileObjects] = useState<Map<number, File>>(new Map())
 
   const filteredFiles = files
@@ -129,7 +128,6 @@ export const FilesPage = () => {
           bValue = b.type
           break
         case 'size':
-          // Extract numeric value from size string (e.g., "2.4 MB" -> 2.4)
           aValue = parseFloat(a.size.replace(/[^0-9.]/g, '')) || 0
           bValue = parseFloat(b.size.replace(/[^0-9.]/g, '')) || 0
           break
@@ -145,15 +143,6 @@ export const FilesPage = () => {
       if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1
       return 0
     })
-
-  const handleSort = (field: 'name' | 'type' | 'size' | 'uploadedAt') => {
-    if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
-    } else {
-      setSortField(field)
-      setSortDirection('asc')
-    }
-  }
 
   const stats = {
     total: files.length,
@@ -222,11 +211,10 @@ export const FilesPage = () => {
       return
     }
 
-    const maxSize = 100 * 1024 * 1024 // 100MB
+    const maxSize = 100 * 1024 * 1024
     const filesToUpload: File[] = []
     const invalidFiles: string[] = []
 
-    // Validate files
     Array.from(fileList).forEach((file) => {
       if (file.size > maxSize) {
         invalidFiles.push(`${file.name} (exceeds 100MB limit)`)
@@ -241,12 +229,10 @@ export const FilesPage = () => {
 
     if (filesToUpload.length === 0) return
 
-    // Simulate upload progress
     filesToUpload.forEach((file) => {
       const fileName = file.name
       setUploadingFiles((prev) => [...prev, fileName])
 
-      // Simulate upload progress
       let progress = 0
       const interval = setInterval(() => {
         progress += Math.random() * 30
@@ -254,7 +240,6 @@ export const FilesPage = () => {
           progress = 100
           clearInterval(interval)
 
-          // Add file to list
           const newFile: FileItem = {
             id: Date.now() + Math.random(),
             name: file.name,
@@ -274,7 +259,6 @@ export const FilesPage = () => {
 
           setUploadingFiles((prev) => {
             const updated = prev.filter((f) => f !== fileName)
-            // Close modal if all uploads are complete
             if (updated.length === 0) {
               setTimeout(() => {
                 setShowUploadModal(false)
@@ -302,7 +286,6 @@ export const FilesPage = () => {
     const fileObj = fileObjects.get(file.id)
 
     if (fileObj) {
-      // Download actual uploaded file
       const url = URL.createObjectURL(fileObj)
       const link = document.createElement('a')
       link.href = url
@@ -313,7 +296,6 @@ export const FilesPage = () => {
       URL.revokeObjectURL(url)
       showToast(`Downloading ${file.name}...`, 'info')
     } else {
-      // For demo files, create a dummy file
       const blob = new Blob(['This is a demo file. In production, this would be the actual file content.'], {
         type: 'text/plain',
       })
@@ -618,7 +600,6 @@ export const FilesPage = () => {
                   onChange={(e) => {
                     const targetFolder = (document.getElementById('upload-folder') as HTMLSelectElement)?.value || 'Root'
                     handleFileUpload(e.target.files, targetFolder)
-                    // Reset input
                     e.target.value = ''
                   }}
                 />

@@ -8,7 +8,6 @@ export const AdvancedAnalyticsPage = () => {
   const [chartType, setChartType] = useState<ChartType>('line')
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d')
 
-  // Simulated time series data
   const generateTimeSeriesData = (days: number) => {
     return Array.from({ length: days }, (_, i) => ({
       date: new Date(Date.now() - (days - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
@@ -93,7 +92,7 @@ export const AdvancedAnalyticsPage = () => {
     <div className="flex flex-col gap-6">
       <header className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900 md:text-3xl">Advanced Analytics</h1>
+          <h1 className="text-2xl font-semibold text-slate-900 md:text-3xl">Analytics</h1>
           <p className="mt-1 text-sm text-slate-600">
             Deep insights, cohort analysis, funnel tracking, and predictive analytics for data-driven decisions.
           </p>

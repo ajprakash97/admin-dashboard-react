@@ -52,17 +52,22 @@ export const DataInsightsPage = () => {
   const [isDraggingImport, setIsDraggingImport] = useState(false)
   const [importTable, setImportTable] = useState('Users')
 
-  // Simulate real-time updates
+  type KpiCategory = 'revenue' | 'marketing' | 'retention' | 'satisfaction' | 'operations'
+  const [newKpi, setNewKpi] = useState({
+    name: '',
+    category: 'revenue' as KpiCategory,
+    target: '',
+  })
+
   useEffect(() => {
     if (isRealTime) {
       const interval = setInterval(() => {
         setLastUpdate(new Date())
-      }, 5000) // Update every 5 seconds
+      }, 5000)
       return () => clearInterval(interval)
     }
   }, [isRealTime])
 
-  // Generate sample time series data
   const generateTimeSeriesData = (days: number, baseValue: number) => {
     return Array.from({ length: days }, (_, i) => ({
       date: new Date(Date.now() - (days - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
@@ -93,7 +98,14 @@ export const DataInsightsPage = () => {
   const currentData = getCurrentData()
   const maxValue = Math.max(...currentData.map((d) => d.value))
 
-  // Custom KPIs
+  const handleCreateKpi = () => {
+    if (newKpi.name && newKpi.target) {
+      showToast(`KPI "${newKpi.name}" created successfully!`, 'success')
+      setShowKPIBuilder(false)
+      setNewKpi({ name: '', category: 'revenue', target: '' })
+    }
+  }
+
   const customKPIs: KPI[] = [
     {
       id: 1,
@@ -142,7 +154,6 @@ export const DataInsightsPage = () => {
     },
   ]
 
-  // Backup data
   const backups: Backup[] = [
     {
       id: 1,
@@ -179,7 +190,6 @@ export const DataInsightsPage = () => {
     },
   ]
 
-  // Archive data
   const archives: Archive[] = [
     {
       id: 1,
@@ -210,7 +220,6 @@ export const DataInsightsPage = () => {
     },
   ]
 
-  // Pie chart data
   const pieChartData = [
     { label: 'Direct', value: 45, color: 'bg-brand' },
     { label: 'Organic Search', value: 30, color: 'bg-emerald-500' },
@@ -218,7 +227,6 @@ export const DataInsightsPage = () => {
     { label: 'Referral', value: 10, color: 'bg-amber-400' },
   ]
 
-  // Predictive analytics data
   const predictions = [
     {
       metric: 'Revenue Forecast',
@@ -1066,11 +1074,8 @@ export const DataInsightsPage = () => {
                   setIsImporting(true)
                   setImportProgress(0)
 
-                  // Simulate file reading and import progress
                   const reader = new FileReader()
-                  reader.onload = async (e) => {
-                    const text = e.target?.result as string
-                    // Simulate parsing and importing
+                  reader.onload = async () => {
                     let progress = 0
                     const interval = setInterval(() => {
                       progress += Math.random() * 20

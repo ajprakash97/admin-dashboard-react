@@ -12,7 +12,6 @@ export const AnalyticsPage = () => {
     { label: 'Bounce Rate', value: '32.1%', change: '-2.4%', trend: 'up', icon: '📉' },
   ]
 
-  // Simulated time series data for charts
   const revenueData = [
     { date: 'Mon', value: 12000 },
     { date: 'Tue', value: 15000 },

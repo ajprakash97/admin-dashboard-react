@@ -254,7 +254,6 @@ export const DashboardPage = () => {
                   <button
                     key={format}
                     onClick={() => {
-                      // Generate file content based on format
                       let content = ''
                       let mimeType = ''
                       let fileName = `dashboard-export-${new Date().toISOString().split('T')[0]}`
@@ -280,18 +279,15 @@ export const DashboardPage = () => {
                         mimeType = 'application/json'
                         fileName += '.json'
                       } else if (format === 'Excel') {
-                        // For Excel, we'll create a CSV-like format
                         content = 'Metric,Value,Change\nActive Users,1245,+12%\nMRR,$45,230,+8.2%\nError Rate,0.12%,-0.03%\nResponse Time,245ms,-15ms'
                         mimeType = 'application/vnd.ms-excel'
                         fileName += '.csv'
                       } else {
-                        // PDF - create a simple text representation
                         content = 'Dashboard Export Report\n\nActive Users: 1,245 (+12%)\nMRR: $45,230 (+8.2%)\nError Rate: 0.12% (-0.03%)\nResponse Time: 245ms (-15ms)'
                         mimeType = 'text/plain'
                         fileName += '.txt'
                       }
 
-                      // Create and download file
                       const blob = new Blob([content], { type: mimeType })
                       const url = URL.createObjectURL(blob)
                       const link = document.createElement('a')
@@ -354,5 +350,3 @@ export const DashboardPage = () => {
     </div>
   )
 }
-
-

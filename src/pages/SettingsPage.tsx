@@ -27,7 +27,6 @@ export const SettingsPage = () => {
               return
             }
 
-            // In a real app, this would save to backend
             showToast(`Settings saved: ${workspaceName} (${timezone})`, 'success')
           }}
         >
@@ -102,5 +101,3 @@ export const SettingsPage = () => {
     </div>
   )
 }
-
-

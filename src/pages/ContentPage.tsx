@@ -682,20 +682,18 @@ export const ContentPage = () => {
                     ✏️ Edit Content
                   </button>
                   {selectedContent.status === 'Published' && (
-                    <button
-                      onClick={() => {
-                        // In a real app, this would open the content in a new tab or navigate to the public URL
-                        showToast(`Opening "${selectedContent.title}" in new tab...`, 'info')
-                      }}
-                      className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-gray-400"
-                    >
-                      🔗 View Live
-                    </button>
-                  )}
                   <button
                     onClick={() => {
-                      // Generate and download content as a file
-                      const content = `Content: ${selectedContent.title}\n\nType: ${selectedContent.type}\nStatus: ${selectedContent.status}\nAuthor: ${selectedContent.author}\nCreated: ${selectedContent.createdAt}\nUpdated: ${selectedContent.updatedAt}\nViews: ${selectedContent.views}\nCategory: ${selectedContent.category || 'N/A'}\nTags: ${selectedContent.tags?.join(', ') || 'N/A'}\n\nThis is a preview of the content. In production, this would contain the full content body.`
+                      showToast(`Opening "${selectedContent.title}" in new tab...`, 'info')
+                    }}
+                    className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-gray-400"
+                  >
+                    🔗 View Live
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    const content = `Content: ${selectedContent.title}\n\nType: ${selectedContent.type}\nStatus: ${selectedContent.status}\nAuthor: ${selectedContent.author}\nCreated: ${selectedContent.createdAt}\nUpdated: ${selectedContent.updatedAt}\nViews: ${selectedContent.views}\nCategory: ${selectedContent.category || 'N/A'}\nTags: ${selectedContent.tags?.join(', ') || 'N/A'}\n\nThis is a preview of the content. In production, this would contain the full content body.`
                       const blob = new Blob([content], { type: 'text/plain' })
                       const url = URL.createObjectURL(blob)
                       const link = document.createElement('a')

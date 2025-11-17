@@ -119,7 +119,6 @@ export const ReportsPage = () => {
           bValue = b.status
           break
         case 'createdAt':
-          // Simple comparison - in real app, parse dates properly
           aValue = a.createdAt
           bValue = b.createdAt
           break
@@ -131,15 +130,6 @@ export const ReportsPage = () => {
       if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1
       return 0
     })
-
-  const handleSort = (field: 'name' | 'type' | 'status' | 'createdAt') => {
-    if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
-    } else {
-      setSortField(field)
-      setSortDirection('asc')
-    }
-  }
 
   const handleCreateReport = () => {
     if (selectedReportType && reportName) {
@@ -548,7 +538,6 @@ export const ReportsPage = () => {
                   return
                 }
 
-                // Validate email format
                 const emails = recipients.split(',').map((email) => email.trim())
                 const invalidEmails = emails.filter((email) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
 
@@ -557,7 +546,6 @@ export const ReportsPage = () => {
                   return
                 }
 
-                // In a real app, this would make an API call
                 showToast('Report scheduled successfully!', 'success')
                 setShowScheduleModal(false)
               }}

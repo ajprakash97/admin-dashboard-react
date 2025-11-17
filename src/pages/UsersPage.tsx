@@ -167,7 +167,6 @@ export const UsersPage = () => {
           bValue = b.status
           break
         case 'lastSeen':
-          // Simple comparison - in real app, parse dates properly
           aValue = a.lastSeen
           bValue = b.lastSeen
           break
@@ -508,7 +507,6 @@ export const UsersPage = () => {
                   showToast('Please enter a valid email address', 'error')
                   return
                 }
-                // In a real app, this would make an API call
                 showToast(`Invitation sent to ${inviteForm.email} as ${inviteForm.role}`, 'success')
                 setShowInviteModal(false)
                 setInviteForm({ email: '', role: 'Viewer', department: '' })
@@ -730,11 +728,8 @@ export const UsersPage = () => {
                   setIsImporting(true)
                   setImportProgress(0)
 
-                  // Simulate file reading and import progress
                   const reader = new FileReader()
-                  reader.onload = async (e) => {
-                    const text = e.target?.result as string
-                    // Simulate parsing and importing
+                  reader.onload = async () => {
                     let progress = 0
                     const interval = setInterval(() => {
                       progress += Math.random() * 20
@@ -783,12 +778,10 @@ export const UsersPage = () => {
                   <button
                     key={format}
                     onClick={() => {
-                      // Generate file content based on format
                       let content = ''
                       let mimeType = ''
                       let fileName = `users-export-${new Date().toISOString().split('T')[0]}`
 
-                      // Get filtered users data
                       const usersToExport = filteredUsers
 
                       if (format === 'CSV') {
@@ -814,7 +807,6 @@ export const UsersPage = () => {
                         mimeType = 'application/json'
                         fileName += '.json'
                       } else {
-                        // Excel - create CSV format
                         content = 'Name,Email,Role,Status,Department,Last Seen\n'
                         usersToExport.forEach((user) => {
                           content += `${user.name},${user.email},${user.role},${user.status},${user.department || 'N/A'},${user.lastSeen}\n`
@@ -823,7 +815,6 @@ export const UsersPage = () => {
                         fileName += '.csv'
                       }
 
-                      // Create and download file
                       const blob = new Blob([content], { type: mimeType })
                       const url = URL.createObjectURL(blob)
                       const link = document.createElement('a')

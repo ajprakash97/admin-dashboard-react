@@ -24,6 +24,8 @@ export const CustomFieldsPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState<'all' | FieldCategory>('all')
   const [typeFilter, setTypeFilter] = useState<'all' | FieldType>('all')
+  const [showAddOptionModal, setShowAddOptionModal] = useState(false)
+  const [newOptionValue, setNewOptionValue] = useState('')
 
   const [newField, setNewField] = useState({
     name: '',
@@ -182,9 +184,10 @@ export const CustomFieldsPage = () => {
   }
 
   const addOption = () => {
-    const option = prompt('Enter option value:')
-    if (option) {
-      setNewField({ ...newField, options: [...(newField.options || []), option] })
+    if (newOptionValue.trim()) {
+      setNewField({ ...newField, options: [...(newField.options || []), newOptionValue.trim()] })
+      setNewOptionValue('')
+      setShowAddOptionModal(false)
     }
   }
 
@@ -515,7 +518,7 @@ export const CustomFieldsPage = () => {
                         ))}
                         <button
                           type="button"
-                          onClick={addOption}
+                          onClick={() => setShowAddOptionModal(true)}
                           className="w-full rounded-md border border-dashed border-gray-300 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:border-gray-400"
                         >
                           + Add Option
@@ -577,6 +580,65 @@ export const CustomFieldsPage = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {showAddOptionModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white shadow-lg">
+            <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+              <h2 className="text-lg font-semibold text-slate-900">Add Option</h2>
+              <button
+                onClick={() => {
+                  setShowAddOptionModal(false)
+                  setNewOptionValue('')
+                }}
+                className="text-slate-400 hover:text-slate-600"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="px-6 py-4">
+              <label htmlFor="option-value" className="block text-xs font-medium text-slate-600">
+                Option Value *
+              </label>
+              <input
+                id="option-value"
+                type="text"
+                value={newOptionValue}
+                onChange={(e) => setNewOptionValue(e.target.value)}
+                placeholder="Enter option value"
+                className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    addOption()
+                  }
+                }}
+                autoFocus
+              />
+            </div>
+            <div className="flex justify-end gap-2 border-t border-gray-200 px-6 py-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAddOptionModal(false)
+                  setNewOptionValue('')
+                }}
+                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-slate-700 hover:border-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={addOption}
+                disabled={!newOptionValue.trim()}
+                className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-white hover:bg-brand-dark disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Add Option
+              </button>
+            </div>
           </div>
         </div>
       )}

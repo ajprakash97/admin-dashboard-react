@@ -20,7 +20,7 @@ import { AccountPage } from './pages/AccountPage'
 function App() {
   return (
     <ToastProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/react-admin-dashboard">
         <Routes>
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />

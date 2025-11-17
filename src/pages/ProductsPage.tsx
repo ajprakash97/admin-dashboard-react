@@ -92,7 +92,6 @@ export const ProductsPage = () => {
           bValue = b.category.toLowerCase()
           break
         case 'price':
-          // Extract numeric value from price string
           aValue = parseFloat(a.price.replace(/[^0-9.]/g, '')) || 0
           bValue = parseFloat(b.price.replace(/[^0-9.]/g, '')) || 0
           break
@@ -101,7 +100,6 @@ export const ProductsPage = () => {
           bValue = b.users
           break
         case 'revenue':
-          // Extract numeric value from revenue string
           aValue = parseFloat(a.revenue.replace(/[^0-9.]/g, '')) || 0
           bValue = parseFloat(b.revenue.replace(/[^0-9.]/g, '')) || 0
           break
@@ -355,7 +353,6 @@ export const ProductsPage = () => {
                   showToast('Please enter a price', 'warning')
                   return
                 }
-                // In a real app, this would make an API call
                 showToast(`Product "${productForm.name}" created successfully!`, 'success')
                 setShowAddModal(false)
                 setProductForm({ name: '', category: 'Subscription', price: '', status: 'Active' })
@@ -596,11 +593,8 @@ export const ProductsPage = () => {
                   setIsImporting(true)
                   setImportProgress(0)
 
-                  // Simulate file reading and import progress
                   const reader = new FileReader()
-                  reader.onload = async (e) => {
-                    const text = e.target?.result as string
-                    // Simulate parsing and importing
+                  reader.onload = async () => {
                     let progress = 0
                     const interval = setInterval(() => {
                       progress += Math.random() * 20

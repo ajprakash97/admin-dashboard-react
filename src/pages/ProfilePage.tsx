@@ -260,7 +260,6 @@ export const ProfilePage = () => {
                       type="button"
                       onClick={() => {
                         setIsEditing(false)
-                        // Reset form to original values
                         setProfileForm({
                           firstName: 'Admin',
                           lastName: 'User',

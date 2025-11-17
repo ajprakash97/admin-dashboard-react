@@ -18,7 +18,7 @@ export const AccountPage = () => {
     country: 'United States',
   })
 
-  const [paymentMethod, setPaymentMethod] = useState({
+  const [paymentMethod] = useState({
     cardNumber: '**** **** **** 4242',
     expiryDate: '12/25',
     cardholderName: 'Admin User',
@@ -90,7 +90,7 @@ export const AccountPage = () => {
     setShowApiKeyModal(false)
   }
 
-  const handleDeleteApiKey = (keyId: number) => {
+  const handleDeleteApiKey = () => {
     showToast('API key deleted successfully', 'success')
   }
 
@@ -551,7 +551,7 @@ export const AccountPage = () => {
                       <button
                         onClick={() => {
                           if (confirm(`Are you sure you want to delete "${key.name}"?`)) {
-                            handleDeleteApiKey(key.id)
+                            handleDeleteApiKey()
                           }
                         }}
                         className="rounded-md border border-rose-300 px-3 py-1 text-xs font-medium text-rose-700 hover:border-rose-400"

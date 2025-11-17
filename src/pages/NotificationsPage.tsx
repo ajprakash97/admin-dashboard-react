@@ -350,7 +350,6 @@ export const NotificationsPage = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault()
-                // In a real app, this would save settings to backend
                 showToast('Settings saved', 'success')
                 setShowSettings(false)
               }}

@@ -1,11 +1,12 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { useToast } from '../contexts/ToastContext'
+import { Footer } from '../components/Footer'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard' },
+  // { to: '/analytics', label: 'Analytics' },
   { to: '/analytics', label: 'Analytics' },
-  { to: '/advanced-analytics', label: 'Advanced Analytics' },
   { to: '/users', label: 'Users' },
   { to: '/products', label: 'Products' },
   { to: '/reports', label: 'Reports' },
@@ -18,13 +19,12 @@ const navItems = [
 ]
 
 export const DashboardLayout = () => {
-  const [unreadCount] = useState(3) // In a real app, this would come from state/API
+  const [unreadCount] = useState(3)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { showToast } = useToast()
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -42,11 +42,9 @@ export const DashboardLayout = () => {
   }, [showUserMenu])
 
   const handleLogout = () => {
-    // In a real app, this would clear auth tokens, call logout API, etc.
     showToast('Logged out successfully', 'success')
     setShowUserMenu(false)
-    // In a real app, navigate to login page
-    // navigate('/login')
+    navigate('/login')
   }
 
   return (
@@ -117,14 +115,14 @@ export const DashboardLayout = () => {
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-xs font-medium text-slate-700 hover:border-gray-400 transition-colors"
               >
-                AK
+                AJ
               </button>
 
               {showUserMenu && (
                 <div className="absolute right-0 top-10 z-50 w-56 rounded-lg border border-gray-200 bg-white shadow-lg">
                   <div className="border-b border-gray-200 px-4 py-3">
-                    <p className="text-sm font-semibold text-slate-900">Admin User</p>
-                    <p className="text-xs text-slate-600">admin@example.com</p>
+                    <p className="text-sm font-semibold text-slate-900">Ajayprakash</p>
+                    <p className="text-xs text-slate-600">itsme@ajprakash.com</p>
                   </div>
                   <div className="py-1">
                     <button
@@ -177,9 +175,8 @@ export const DashboardLayout = () => {
             <Outlet />
           </div>
         </main>
+        <Footer />
       </div>
     </div>
   )
 }
-
-
